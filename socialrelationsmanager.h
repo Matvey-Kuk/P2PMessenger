@@ -3,14 +3,14 @@
 
 //Класс, отвечающий за дипломатию с узлами сети.
 //Управляет пингами
-//Запрашивает необходимые данные
+//Запрашивает необходимые данные из состояния приложения
 
 #include <privateconnectionfunctionality.h>
 
 class SocialRelationsManager : public PrivateConnectionFunctionality
 {
 public:
-    SocialRelationsManager();
+    SocialRelationsManager(Connection *_connection);
 };
 
 #endif // SOCIALRELATIONSMANAGER_H

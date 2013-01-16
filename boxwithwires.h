@@ -5,6 +5,9 @@
 
 #include <connection.h>
 #include <server.h>
+#include <socialrelationsmanager.h>
+#include <publicconnectionfunctional.h>
+#include <privateconnectionfunctionality.h>
 
 #include <QObject>
 #include <QVector>
@@ -20,6 +23,12 @@ private:
 
     //Сервер:
     Server* server;
+
+    //Приватный функционал для каждого соединения:
+    QVector<PrivateConnectionFunctionality* > privateConnectionFunctionalities;
+
+    //Добавляет стандартный приватный функционал соединению:
+    void addStandartPrivateFunctionality(Connection* _connection);
 
 private slots:
 

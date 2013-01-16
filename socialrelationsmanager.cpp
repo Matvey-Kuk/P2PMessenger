@@ -1,5 +1,6 @@
 #include "socialrelationsmanager.h"
 
-SocialRelationsManager::SocialRelationsManager()
+SocialRelationsManager::SocialRelationsManager(Connection* _connection)
 {
+    qDebug()<<"Created SocialRelationsManager for concrete connection.";
 }
