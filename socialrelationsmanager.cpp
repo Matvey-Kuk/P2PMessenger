@@ -18,7 +18,6 @@ SocialRelationsManager::SocialRelationsManager(Connection* _connection)
 }
 
 void SocialRelationsManager::dataReciever(QString commandTypePrefix, QString message){
-    qDebug()<<"Recieved message:"<<commandTypePrefix<<"+"<<message;
     if(commandTypePrefix=="ping"){
         qDebug()<<"Recieved ping message:"<<message;
     }
