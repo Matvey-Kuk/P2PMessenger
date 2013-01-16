@@ -1,5 +1,10 @@
 #include "privateconnectionfunctionality.h"
 
-PrivateConnectionFunctionality::PrivateConnectionFunctionality()
+PrivateConnectionFunctionality::PrivateConnectionFunctionality(QObject *parent)
+    : QObject(parent)
 {
+}
+
+PrivateConnectionFunctionality::PrivateConnectionFunctionality(){
+
 }

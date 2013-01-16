@@ -18,15 +18,13 @@ int BoxWithWires::coutConnections(){
 }
 
 void BoxWithWires::createConnection(QString ip, int port){
-
     connections.append(new Connection(ip,port));
-
     addStandartPrivateFunctionality(connections[connections.count()-1]);
-
 }
 
 void BoxWithWires::createConnectionWithSocket(QTcpSocket* socket){
     connections.append(new Connection(socket));
+    addStandartPrivateFunctionality(connections[connections.count()-1]);
 }
 
 Connection* BoxWithWires::getConnection(int number){

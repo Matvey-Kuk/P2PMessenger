@@ -38,7 +38,7 @@ void Connection::sendData(QString commandTypePrefix, QString message)
     QByteArray block;
     QDataStream out(&block, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_3);
-    out << quint16(0) << commandTypePrefix << ":" << message;
+    out << quint16(0) << commandTypePrefix+":"+message;
     out.device()->seek(0);
     out << quint16(block.size() - sizeof(quint16));
     tcpSocket->write(block);
@@ -73,7 +73,9 @@ void Connection::reading()
         QString recievedText;
         in >> recievedText;
 
-        emit recievedData(recievedText.section(':',0,1),recievedText.section(':',1,-1));
+        //qDebug()<<"Reading inside connection:"<<recievedText;
+
+        emit recievedData(recievedText.section(':',0,0),recievedText.section(':',1,-1));
 
         nextBlockSize = 0;
     }

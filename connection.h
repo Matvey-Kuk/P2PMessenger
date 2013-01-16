@@ -55,6 +55,8 @@ public:
     //Отправить запрос. Префикс- какому обработчику он направлен.
     void sendData(QString commandTypePrefix, QString message);
 
+    //Данные, назначаемые функционалом:
+    int pingTime;
 
 };
 

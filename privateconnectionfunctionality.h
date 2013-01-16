@@ -5,10 +5,16 @@
 
 #include <connection.h>
 
-class PrivateConnectionFunctionality
+#include <QObject>
+
+class PrivateConnectionFunctionality : public QObject
 {
+    Q_OBJECT
+
 public:
     PrivateConnectionFunctionality();
+
+    PrivateConnectionFunctionality(QObject *parent);
 
     //Адрес соединения, к которому присоединен функционал
     Connection* connection;
