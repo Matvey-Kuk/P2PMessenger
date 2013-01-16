@@ -6,20 +6,34 @@
 #include <connection.h>
 #include <server.h>
 
+#include <QObject>
 #include <QVector>
 #include <QString>
 
-class BoxWithWires
+class BoxWithWires : public QObject
 {
+    Q_OBJECT
+
 private:
     //Все соединения:
     QVector<Connection* > connections;
 
-public:
-    BoxWithWires();
+    //Сервер:
+    Server* server;
 
-    //Получить адрес соединения:
+private slots:
+
+    //Создает соединение, которое получает от сервера
+    void createConnectionWithSocket(QTcpSocket* socket);
+
+public:
+    BoxWithWires(QObject *parent);
+
+    //Получить соединение:
     Connection* getConnection(int number);
+
+    //Получить колличество соединений
+    int coutConnections();
 
     //Удалить соединение:
     void removeConnection(int number);

@@ -19,10 +19,10 @@ SOURCES += main.cpp\
     paranoid.cpp \
     boxwithwires.cpp \
     connection.cpp \
-    server.cpp \
     messengerconnectionprovider.cpp \
     privateconnectionfunctionality.cpp \
-    publicconnectionfunctional.cpp
+    publicconnectionfunctional.cpp \
+    server.cpp
 
 HEADERS  += mainwindow.h \
     tunnelwarlock.h \
@@ -32,9 +32,9 @@ HEADERS  += mainwindow.h \
     paranoid.h \
     boxwithwires.h \
     connection.h \
-    server.h \
     messengerconnectionprovider.h \
     privateconnectionfunctionality.h \
-    publicconnectionfunctional.h
+    publicconnectionfunctional.h \
+    server.h
 
 FORMS    += mainwindow.ui

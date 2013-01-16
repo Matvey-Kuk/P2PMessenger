@@ -6,9 +6,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    boxWithWires=new BoxWithWires(this);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    boxWithWires->createConnection(ui->lineEdit->text().section(':',0,0),ui->lineEdit->text().section(':',1,1).toInt());
 }
