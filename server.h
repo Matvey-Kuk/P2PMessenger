@@ -1,14 +1,20 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-//Класс сервера, ждет соединения и отдает их для создания объектов
-
 #include <QTcpServer>
+#include <QTcpSocket>
 
 class Server : public QTcpServer
 {
+    Q_OBJECT
+
 public:
-    Server();
+    Server(QObject *parent = 0);
+signals:
+    void newConnection(QTcpSocket* newSocket);
+private:
+    void incomingConnection(int socketId);
 };
+
 
 #endif // SERVER_H
