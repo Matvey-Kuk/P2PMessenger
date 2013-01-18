@@ -23,11 +23,14 @@ private:
     //Нафиг не нужен пока:
     QTime pongTime;
 
+    //Является ли инициализатором соединения:
+    bool isConnectionInitialiser;
+
 public:
 
     SocialRelationsManager(QObject *parent);
 
-    SocialRelationsManager(Connection *_connection);
+    SocialRelationsManager(Connection *_connection, bool connectionInitialiser);
 
 private slots:
 

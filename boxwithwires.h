@@ -28,7 +28,7 @@ private:
     QVector<PrivateConnectionFunctionality* > privateConnectionFunctionalities;
 
     //Добавляет стандартный приватный функционал соединению:
-    void addStandartPrivateFunctionality(Connection* _connection);
+    void addStandartPrivateFunctionality(Connection* _connection, bool connectionInitialiser);
 
 private slots:
 
