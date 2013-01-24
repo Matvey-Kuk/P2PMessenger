@@ -35,7 +35,7 @@ public:
 private slots:
 
     //Обрабатывает полученные данные
-    void dataReciever(QString commandTypePrefix, QString message);
+    void dataReciever(QString commandTypePrefix, QString message, Connection* fromConnection);
 
     //?
     void sendPing();

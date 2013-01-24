@@ -75,7 +75,7 @@ void Connection::reading()
 
         //qDebug()<<"Reading inside connection:"<<recievedText;
 
-        emit recievedData(recievedText.section(':',0,0),recievedText.section(':',1,-1));
+        emit recievedData(recievedText.section(':',0,0),recievedText.section(':',1,-1), this);
 
         nextBlockSize = 0;
     }

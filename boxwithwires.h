@@ -8,6 +8,7 @@
 #include <socialrelationsmanager.h>
 #include <publicconnectionfunctional.h>
 #include <privateconnectionfunctionality.h>
+#include <p2porganizer.h>
 
 #include <QObject>
 #include <QVector>
@@ -24,11 +25,14 @@ private:
     //Сервер:
     Server* server;
 
+    //P2P функционал
+    P2POrganizer* p2pOrganizer;
+
     //Приватный функционал для каждого соединения:
     QVector<PrivateConnectionFunctionality* > privateConnectionFunctionalities;
 
     //Добавляет стандартный приватный функционал соединению:
-    void addStandartPrivateFunctionality(Connection* _connection, bool connectionInitialiser);
+    void addStandartFunctionality(Connection* _connection, bool connectionInitialiser);
 
 private slots:
 

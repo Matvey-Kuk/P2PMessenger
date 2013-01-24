@@ -40,7 +40,7 @@ private slots:
 signals:
 
     //Когда соединение получает новые данные. Префикс- какому обработчику они направлены.
-    void recievedData(QString commandTypePrefix, QString message);
+    void recievedData(QString commandTypePrefix, QString message, Connection* fromConnection);
 
 public:
 

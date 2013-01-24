@@ -11,7 +11,7 @@ SocialRelationsManager::SocialRelationsManager(Connection* _connection, bool con
 {
     isConnectionInitialiser=connectionInitialiser;
     connection=_connection;
-    connect(connection,SIGNAL(recievedData(QString,QString)),this,SLOT(dataReciever(QString,QString)));
+    connect(connection,SIGNAL(recievedData(QString,QString,Connection*)),this,SLOT(dataReciever(QString,QString,Connection*)));
 
     pingTimer.setInterval(PingInterval);
     QObject::connect(&pingTimer, SIGNAL(timeout()), this,SLOT(sendPing()));
@@ -20,7 +20,7 @@ SocialRelationsManager::SocialRelationsManager(Connection* _connection, bool con
     qDebug()<<"Created SocialRelationsManager for concrete connection.";
 }
 
-void SocialRelationsManager::dataReciever(QString commandTypePrefix, QString message){
+void SocialRelationsManager::dataReciever(QString commandTypePrefix, QString message, Connection *fromConnection){
 
     if(commandTypePrefix=="ping"){
         if ( message == "PING" ) {

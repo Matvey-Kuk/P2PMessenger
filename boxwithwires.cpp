@@ -11,6 +11,8 @@ BoxWithWires::BoxWithWires(QObject *parent)
     connect(server,SIGNAL(newConnection(QTcpSocket*)),this,SLOT(createConnectionWithSocket(QTcpSocket*)));
     qDebug()<<"Server started at port:"<<server->serverPort();
 
+    //Создание p2p функционала:
+    p2pOrganizer= new P2POrganizer(this);
 }
 
 int BoxWithWires::coutConnections(){
@@ -19,18 +21,19 @@ int BoxWithWires::coutConnections(){
 
 void BoxWithWires::createConnection(QString ip, int port){
     connections.append(new Connection(ip,port));
-    addStandartPrivateFunctionality(connections[connections.count()-1],true);
+    addStandartFunctionality(connections[connections.count()-1],true);
 }
 
 void BoxWithWires::createConnectionWithSocket(QTcpSocket* socket){
     connections.append(new Connection(socket));
-    addStandartPrivateFunctionality(connections[connections.count()-1],false);
+    addStandartFunctionality(connections[connections.count()-1],false);
 }
 
 Connection* BoxWithWires::getConnection(int number){
     return(connections[number]);
 }
 
-void BoxWithWires::addStandartPrivateFunctionality(Connection* _connection,bool connectionInitialiser){
+void BoxWithWires::addStandartFunctionality(Connection* _connection,bool connectionInitialiser){
     privateConnectionFunctionalities.append(new SocialRelationsManager(_connection,connectionInitialiser));
+    p2pOrganizer->addConnection(_connection);
 }
