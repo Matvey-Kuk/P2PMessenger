@@ -10,6 +10,7 @@
 #include <privateconnectionfunctionality.h>
 #include <p2porganizer.h>
 #include <globalcondition.h>
+#include <knownpeer.h>
 
 #include <QObject>
 #include <QVector>
@@ -22,6 +23,9 @@ class BoxWithWires : public QObject
 private:
     //Все соединения:
     QVector<Connection* > connections;
+
+    //Известные пиры:
+    QVector<KnownPeer* > knownPeers;
 
     //Сервер:
     Server* server;
@@ -36,9 +40,11 @@ private:
     void addStandartFunctionality(Connection* _connection, bool connectionInitialiser);
 
 private slots:
-
     //Создает соединение, которое получает от сервера
     void createConnectionWithSocket(QTcpSocket* socket);
+
+    //Добавить нового известного пира:
+    void addNewKnownPeer(QString ip, int port);
 
 public:
     BoxWithWires(QObject *parent);

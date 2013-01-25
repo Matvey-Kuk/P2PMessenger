@@ -13,9 +13,11 @@ BoxWithWires::BoxWithWires(QObject *parent)
     }
     connect(server,SIGNAL(newConnection(QTcpSocket*)),this,SLOT(createConnectionWithSocket(QTcpSocket*)));
     qDebug()<<"Server started at port:"<<server->serverPort();
+    GlobalCondition::serverPort=server->serverPort();
 
     //Создание p2p функционала:
     p2pOrganizer= new P2POrganizer(this);
+    connect(p2pOrganizer,SIGNAL(newKnownPeer(QString,int)),this,SLOT(addNewKnownPeer(QString,int)));
 }
 
 int BoxWithWires::coutConnections(){
@@ -39,4 +41,8 @@ Connection* BoxWithWires::getConnection(int number){
 void BoxWithWires::addStandartFunctionality(Connection* _connection,bool connectionInitialiser){
     privateConnectionFunctionalities.append(new SocialRelationsManager(_connection,connectionInitialiser));
     p2pOrganizer->addConnection(_connection);
+}
+
+void BoxWithWires::addNewKnownPeer(QString ip, int port){
+    knownPeers.append(new KnownPeer(ip,port));
 }

@@ -6,12 +6,16 @@
 #include <QString>
 #include <QTcpSocket>
 #include <QObject>
+#include <QHostAddress>
 
 class Connection : public QObject
 {
     Q_OBJECT
 
 private:
+
+    //Порт пира
+    int port;
 
     //Функционирует ли в данный момент соединение:
     bool isConnected();
@@ -55,6 +59,15 @@ public:
     //Отправить запрос. Префикс- какому обработчику он направлен.
     void sendData(QString commandTypePrefix, QString message);
 
+    //Получить ip
+    QString getIp();
+
+    //Получить port
+    int getPort();
+
+    //Установить port
+    void setPort(int _port);
+
     //************************************
     //Данные, назначаемые функционалом:
     //************************************
@@ -62,8 +75,9 @@ public:
     //public relations manager
     int pingTime;
     //p2p organizer
-    bool askingPeers;
-    bool sendingPeers;
+    bool askingPeers;//Запросил ли он пиров
+    bool sendingPeers;//Запросил ли у него пиров
+    bool saidAboutIt;//рассказал ли про этого пира остальным
 
 };
 

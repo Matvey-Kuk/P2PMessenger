@@ -19,6 +19,9 @@ public:
     //Добавляет соединенеие функционалу
     void addConnection(Connection* _connection);
 
+    //Указатель на коробку с проводами:
+    //BoxWithWires* boxWithWires;
+
 private slots:
     //Получает данные от соединений
     void dataReciever(QString commandTypePrefix, QString message, Connection *fromConnection);
@@ -26,13 +29,22 @@ private slots:
     //Обновление по таймеру
     void up();
 
-private:
+signals:
+    //Зарегистрировать нового полученного пира
+    void newKnownPeer(QString ip, int port);
 
+private:
     //Все соединения:
     QVector<Connection* > connections;
 
     //Таймер обновления состояния
     QTimer upTimer;
+
+    //Рассказать о нескольких пирах по соединению
+    void tellAboutANumberOfPeers(int number, Connection* target);
+
+    //Проверка пира и генерация сигнала о его регистрации
+    void checknewPeer(QString ip, int port);
 
 };
 

@@ -6,10 +6,12 @@
 //Запрашивает необходимые данные из состояния приложения
 
 #include <privateconnectionfunctionality.h>
+#include <globalcondition.h>
 
 #include <QTimer>
 #include <QTime>
 #include <QObject>
+#include <QString>
 
 class SocialRelationsManager : public PrivateConnectionFunctionality
 {
@@ -26,6 +28,9 @@ private:
     //Является ли инициализатором соединения:
     bool isConnectionInitialiser;
 
+    //Проверка известности порта пира
+    void portCheckUp();
+
 public:
 
     SocialRelationsManager(QObject *parent);
@@ -37,7 +42,7 @@ private slots:
     //Обрабатывает полученные данные
     void dataReciever(QString commandTypePrefix, QString message, Connection* fromConnection);
 
-    //?
+    //Отправить ping:
     void sendPing();
 
 };

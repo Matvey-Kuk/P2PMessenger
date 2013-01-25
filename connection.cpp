@@ -98,3 +98,15 @@ void Connection::closeConnection()
 {
     tcpSocket->close();
 }
+
+QString Connection::getIp(){
+    return tcpSocket->peerAddress().toString();
+}
+
+void Connection::setPort(int _port){
+    port=_port;
+}
+
+int Connection::getPort(){
+    return port;
+}

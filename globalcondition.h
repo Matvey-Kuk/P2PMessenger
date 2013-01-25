@@ -8,8 +8,11 @@ private:
 public:
     GlobalCondition();
 
-    //Нужно ли получить больше пиров
+    //Нужно ли получить больше пиров:
     static bool needMorePeers;
+
+    //Порт сервера:
+    static int serverPort;
 };
 
 #endif // GLOBALCONDITION_H
