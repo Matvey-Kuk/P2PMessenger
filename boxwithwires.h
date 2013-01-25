@@ -9,6 +9,7 @@
 #include <publicconnectionfunctional.h>
 #include <privateconnectionfunctionality.h>
 #include <p2porganizer.h>
+#include <globalcondition.h>
 
 #include <QObject>
 #include <QVector>

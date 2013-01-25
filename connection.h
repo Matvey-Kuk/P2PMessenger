@@ -55,8 +55,15 @@ public:
     //Отправить запрос. Префикс- какому обработчику он направлен.
     void sendData(QString commandTypePrefix, QString message);
 
+    //************************************
     //Данные, назначаемые функционалом:
+    //************************************
+
+    //public relations manager
     int pingTime;
+    //p2p organizer
+    bool askingPeers;
+    bool sendingPeers;
 
 };
 

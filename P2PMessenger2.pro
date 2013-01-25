@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     messengerconnectionprovider.cpp \
     privateconnectionfunctionality.cpp \
     publicconnectionfunctional.cpp \
-    server.cpp
+    server.cpp \
+    globalcondition.cpp
 
 HEADERS  += mainwindow.h \
     tunnelwarlock.h \
@@ -35,6 +36,7 @@ HEADERS  += mainwindow.h \
     messengerconnectionprovider.h \
     privateconnectionfunctionality.h \
     publicconnectionfunctional.h \
-    server.h
+    server.h \
+    globalcondition.h
 
 FORMS    += mainwindow.ui

@@ -3,6 +3,9 @@
 BoxWithWires::BoxWithWires(QObject *parent)
     : QObject(parent)
 {
+    //Óñòàíîâêà ãëîáàëüíîãî ñîñòîÿíèÿ:
+    GlobalCondition::needMorePeers=true;
+
     //Ñîçäàíèå ñåğâåğà:
     server= new Server();
     if (!server->listen()) {

@@ -3,10 +3,11 @@
 
 //Класс отвечает за поддержание соединения с пирами, получение новых и раздачу.
 
-#include<connection.h>
+#include <connection.h>
+#include <globalcondition.h>
 
-#include<QVector>
-#include<QTimer>
+#include <QVector>
+#include <QTimer>
 
 class P2POrganizer: public QObject
 {
