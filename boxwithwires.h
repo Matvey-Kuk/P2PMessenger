@@ -15,6 +15,7 @@
 #include <QObject>
 #include <QVector>
 #include <QString>
+#include <QTimer>
 
 class BoxWithWires : public QObject
 {
@@ -39,12 +40,18 @@ private:
     //Добавляет стандартный приватный функционал соединению:
     void addStandartFunctionality(Connection* _connection, bool connectionInitialiser);
 
+    //Таймер обновления состояния
+    QTimer upTimer;
+
 private slots:
     //Создает соединение, которое получает от сервера
     void createConnectionWithSocket(QTcpSocket* socket);
 
     //Добавить нового известного пира:
     void addNewKnownPeer(QString ip, int port);
+
+    //Обновление по таймеру
+    void up();
 
 public:
     BoxWithWires(QObject *parent);

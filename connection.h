@@ -29,7 +29,11 @@ private:
     //Инициализирует при создании соединения:
     void initializator();
 
+    //
     void closeConnection();
+
+    //Текущее состояние соединения:
+    int connectionStatus;
 
 private slots:
 
@@ -67,6 +71,9 @@ public:
 
     //Установить port
     void setPort(int _port);
+
+    //Установлено ли соединение
+    bool connectionEstablished();
 
     //************************************
     //Данные, назначаемые функционалом:

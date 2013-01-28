@@ -44,7 +44,7 @@ private:
     void tellAboutANumberOfPeers(int number, Connection* target);
 
     //Проверка пира и генерация сигнала о его регистрации
-    void checknewPeer(QString ip, int port);
+    void checkNewPeer(QString ip, int port);
 
 };
 

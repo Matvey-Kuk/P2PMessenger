@@ -1,5 +1,9 @@
 #include "connection.h"
 
+static const int DISCONNECTED_state = 2;
+static const int CONNECTED_state = 3;
+static const int CONNECTING_state = 1;
+
 Connection::Connection(QObject *parent)
     : QObject(parent)
 {
@@ -22,6 +26,8 @@ Connection::Connection(QTcpSocket* concreteSocket){
 
 void Connection::initializator()
 {
+    connectionStatus=CONNECTING_state;
+
     QObject::connect(tcpSocket, SIGNAL(connected()), this, SLOT(connected()));
     QObject::connect(tcpSocket, SIGNAL(disconnected()),
             this, SLOT(disconnected()));
@@ -46,6 +52,8 @@ void Connection::sendData(QString commandTypePrefix, QString message)
 
 void Connection::connected()
 {
+    connectionStatus=CONNECTED_state;
+
     qDebug()<<"Succsessfully connected";
 }
 
@@ -96,6 +104,8 @@ void Connection::error()
 
 void Connection::closeConnection()
 {
+    connectionStatus=DISCONNECTED_state;
+
     tcpSocket->close();
 }
 
@@ -109,4 +119,8 @@ void Connection::setPort(int _port){
 
 int Connection::getPort(){
     return port;
+}
+
+bool Connection::connectionEstablished(){
+    return connectionStatus==CONNECTED_state;
 }

@@ -1,8 +1,15 @@
 #include "boxwithwires.h"
 
+static const int upInterval=10*1000;
+
 BoxWithWires::BoxWithWires(QObject *parent)
     : QObject(parent)
 {
+    //Таймер:
+    upTimer.setInterval(upInterval);
+    QObject::connect(&upTimer, SIGNAL(timeout()), this,SLOT(up()));
+    upTimer.start();
+
     //Установка глобального состояния:
     GlobalCondition::needMorePeers=true;
 
@@ -45,4 +52,29 @@ void BoxWithWires::addStandartFunctionality(Connection* _connection,bool connect
 
 void BoxWithWires::addNewKnownPeer(QString ip, int port){
     knownPeers.append(new KnownPeer(ip,port));
+}
+
+void BoxWithWires::up(){
+    bool allConnectionsAreReady=true;
+    for( int j=0 ; j < connections.count() ; j++ ){
+        if(connections[j]->getPort()<0) allConnectionsAreReady=false;
+        if(!connections[j]->connectionEstablished()) allConnectionsAreReady=false;
+    }
+
+    if(connections.count()<10 && allConnectionsAreReady==true){
+        for( int i = 0 ; i < knownPeers.count() ; i++ ){
+            bool okPeer=true;
+            for( int j=0 ; j < connections.count() ; j++ ){
+                if(connections[j]->getIp()==knownPeers[i]->ip && connections[j]->getPort()==knownPeers[i]->port){
+                    okPeer=false;
+                }
+            }
+            if(knownPeers[i]->port==GlobalCondition::serverPort){//TODO: научиться находить себя более логичным методом
+                okPeer=false;
+            }
+            if(okPeer) {
+                createConnection(knownPeers[i]->ip,knownPeers[i]->port);
+            }
+        }
+    }
 }

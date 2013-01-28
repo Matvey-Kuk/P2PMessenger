@@ -66,6 +66,6 @@ void P2POrganizer::tellAboutANumberOfPeers(int number, Connection* target){
     }
 }
 
-void P2POrganizer::checknewPeer(QString ip, int port){
+void P2POrganizer::checkNewPeer(QString ip, int port){
     emit newKnownPeer(ip,port);
 }
