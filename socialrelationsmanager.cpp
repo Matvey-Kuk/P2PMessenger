@@ -32,16 +32,16 @@ void SocialRelationsManager::dataReciever(QString commandTypePrefix, QString mes
         if ( message == "PONG" ) {
             connection->sendData("ping","PING2");
             connection->pingTime=pongTime.elapsed();
-            qDebug()<<"Ping:"<<connection->pingTime;
+            //qDebug()<<"Ping:"<<connection->pingTime;
         }
         if ( message == "PING2" ){
             connection->pingTime=pongTime.elapsed();
-            qDebug()<<"Ping:"<<connection->pingTime;
+            //qDebug()<<"Ping:"<<connection->pingTime;
         }
     }
 
     if(commandTypePrefix=="port"){
-        qDebug()<<"port message:"<<message;
+        //qDebug()<<"port message:"<<message;
         if( message == "request" ){
             connection->sendData("port",QString::number(GlobalCondition::serverPort));
         } else {

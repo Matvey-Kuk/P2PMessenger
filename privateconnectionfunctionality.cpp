@@ -8,3 +8,7 @@ PrivateConnectionFunctionality::PrivateConnectionFunctionality(QObject *parent)
 PrivateConnectionFunctionality::PrivateConnectionFunctionality(){
 
 }
+
+Connection* PrivateConnectionFunctionality::getConnection(){
+    return connection;
+}

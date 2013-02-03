@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     publicconnectionfunctional.cpp \
     server.cpp \
     globalcondition.cpp \
-    knownpeer.cpp
+    knownpeer.cpp \
+    tunnel.cpp
 
 HEADERS  += mainwindow.h \
     tunnelwarlock.h \
@@ -39,6 +40,7 @@ HEADERS  += mainwindow.h \
     publicconnectionfunctional.h \
     server.h \
     globalcondition.h \
-    knownpeer.h
+    knownpeer.h \
+    tunnel.h
 
 FORMS    += mainwindow.ui

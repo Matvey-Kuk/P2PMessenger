@@ -57,6 +57,10 @@ void Connection::connected()
     qDebug()<<"Succsessfully connected";
 }
 
+bool Connection::isDisconnected(){
+    return connectionStatus == DISCONNECTED_state;
+}
+
 void Connection::reading()
 {
     QDataStream in(tcpSocket);
@@ -123,4 +127,8 @@ int Connection::getPort(){
 
 bool Connection::connectionEstablished(){
     return connectionStatus==CONNECTED_state;
+}
+
+Connection::~Connection(){
+    qDebug()<<"Connection destructor.";
 }

@@ -18,6 +18,9 @@ public:
 
     //Адрес соединения, к которому присоединен функционал
     Connection* connection;
+
+    //Возвращает адрес соединения:
+    Connection* getConnection();
 };
 
 #endif // PRIVATECONNECTIONFUNCTIONALITY_H

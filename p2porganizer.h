@@ -19,6 +19,9 @@ public:
     //Добавляет соединенеие функционалу
     void addConnection(Connection* _connection);
 
+    //Удаляет соединение из функционала:
+    void removeConnection(Connection* _connection);
+
     //Указатель на коробку с проводами:
     //BoxWithWires* boxWithWires;
 

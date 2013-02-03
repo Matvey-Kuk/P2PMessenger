@@ -25,6 +25,9 @@ BoxWithWires::BoxWithWires(QObject *parent)
     //Создание p2p функционала:
     p2pOrganizer= new P2POrganizer(this);
     connect(p2pOrganizer,SIGNAL(newKnownPeer(QString,int)),this,SLOT(addNewKnownPeer(QString,int)));
+
+    //Создание туннельного функционала
+    tunnelWarlock= new TunnelWarlock(this);
 }
 
 int BoxWithWires::coutConnections(){
@@ -48,6 +51,34 @@ Connection* BoxWithWires::getConnection(int number){
 void BoxWithWires::addStandartFunctionality(Connection* _connection,bool connectionInitialiser){
     privateConnectionFunctionalities.append(new SocialRelationsManager(_connection,connectionInitialiser));
     p2pOrganizer->addConnection(_connection);
+    tunnelWarlock->addConnection(_connection);
+}
+
+void BoxWithWires::removeStandartFunctionality(Connection* _connection){//re: удаление не функционала, а соединения и функционала
+
+    p2pOrganizer->removeConnection(_connection);
+    tunnelWarlock->removeConnection(_connection);
+
+    for( int i=0 ; i<privateConnectionFunctionalities.count() ; i++ ){
+        if(privateConnectionFunctionalities[i]->getConnection()==_connection){
+            privateConnectionFunctionalities.remove(i);
+        }
+    }
+
+    for( int i=0 ; i<connections.count() ; i++ ){
+        if(connections[i]==_connection){
+            for( int j = 0 ; j < knownPeers.count() ; j++ ){
+                if(knownPeers[j]->port  == connections[i]->getPort())
+                    if(knownPeers[j]->ip == connections[i]->getIp()){
+                        delete knownPeers[j];
+                        knownPeers.remove(j);
+                    }
+            }
+
+            delete connections[i];
+            connections.remove(i);
+        }
+    }
 }
 
 void BoxWithWires::addNewKnownPeer(QString ip, int port){
@@ -55,6 +86,10 @@ void BoxWithWires::addNewKnownPeer(QString ip, int port){
 }
 
 void BoxWithWires::up(){
+
+    //qDebug()<<"privateConnectionFunctionalities.count()="<<privateConnectionFunctionalities.count();
+
+    //соединение с пирами из памяти:
     bool allConnectionsAreReady=true;
     for( int j=0 ; j < connections.count() ; j++ ){
         if(connections[j]->getPort()<0) allConnectionsAreReady=false;
@@ -75,6 +110,13 @@ void BoxWithWires::up(){
             if(okPeer) {
                 createConnection(knownPeers[i]->ip,knownPeers[i]->port);
             }
+        }
+    }
+
+   //Поиск и удаление дисконнектов:
+    for( int j=0 ; j < connections.count() ; j++ ){
+        if(connections[j]->isDisconnected()){
+            removeStandartFunctionality(connections[j]);
         }
     }
 }

@@ -13,25 +13,37 @@ void P2POrganizer::addConnection(Connection* _connection){
     connect(_connection,SIGNAL(recievedData(QString,QString,Connection*)),this,SLOT(dataReciever(QString,QString,Connection*)));
 
     tellAboutANumberOfPeers(10,_connection);
+
     //Установка первоначальных данных
     _connection->askingPeers=false;
     _connection->sendingPeers=false;
     _connection->saidAboutIt=false;
 }
 
+void P2POrganizer::removeConnection(Connection* _connection){
+    for( int i=0 ; i<connections.count() ; i++ ){
+        if(connections[i]==_connection){
+            connections.remove(i);
+        }
+    }
+}
+
 void P2POrganizer::dataReciever(QString commandTypePrefix, QString message, Connection* fromConnection){
     if(commandTypePrefix=="p2p"){
-        qDebug()<<"p2p recieved:"<<message;
+        //qDebug()<<"p2p recieved:"<<message;
         if(message=="morePeers") fromConnection->askingPeers=true;
         if(message=="noMorePeers") fromConnection->askingPeers=false;
     }
     if(commandTypePrefix=="newPeer"){
-        qDebug()<<"newPeer:"<<message;
+        //qDebug()<<"newPeer:"<<message;
         checkNewPeer(message.section(':',0,0),message.section(':',1,-1).toInt());
     }
 }
 
 void P2POrganizer::up(){
+
+    //qDebug()<<"P2POrganiser::connections.count()="<<connections.count();
+
     //Запрос новых пиров если нужно
     for(int i=0; i<connections.count(); i++){
         if(GlobalCondition::needMorePeers!=connections[i]->sendingPeers){

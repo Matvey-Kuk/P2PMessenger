@@ -18,7 +18,7 @@ private:
     int port;
 
     //Функционирует ли в данный момент соединение:
-    bool isConnected();
+    //bool isConnected();
 
     //Соккет, через который идет передача данных:
     QTcpSocket* tcpSocket;
@@ -52,6 +52,9 @@ signals:
 
 public:
 
+    //Деструктор:
+    ~Connection();
+
     explicit Connection(QObject* parent=0);
 
     //Создать соединение с конкретным пиром
@@ -74,6 +77,9 @@ public:
 
     //Установлено ли соединение
     bool connectionEstablished();
+
+    //Нужно ли удалить
+    bool isDisconnected();
 
     //************************************
     //Данные, назначаемые функционалом:

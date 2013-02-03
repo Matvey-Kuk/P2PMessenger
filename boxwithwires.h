@@ -11,6 +11,7 @@
 #include <p2porganizer.h>
 #include <globalcondition.h>
 #include <knownpeer.h>
+#include <tunnelwarlock.h>
 
 #include <QObject>
 #include <QVector>
@@ -34,11 +35,17 @@ private:
     //P2P функционал
     P2POrganizer* p2pOrganizer;
 
+    //Туннельный функционал
+    TunnelWarlock* tunnelWarlock;
+
     //Приватный функционал для каждого соединения:
     QVector<PrivateConnectionFunctionality* > privateConnectionFunctionalities;
 
     //Добавляет стандартный приватный функционал соединению:
     void addStandartFunctionality(Connection* _connection, bool connectionInitialiser);
+
+    //Удаляет стандартный приватный функционал соединения:
+    void removeStandartFunctionality(Connection* _connection);
 
     //Таймер обновления состояния
     QTimer upTimer;

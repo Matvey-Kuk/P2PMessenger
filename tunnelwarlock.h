@@ -4,10 +4,38 @@
 //Класс отвечает за организацию туннелей по существующим соединениям
 //, обслуживание этих туннелей и достоверность доставки.
 
-class TunnelWarlock
+#include <connection.h>
+#include <globalcondition.h>
+
+#include <QVector>
+#include <QTimer>
+
+class TunnelWarlock: public QObject
 {
+    Q_OBJECT
+
 public:
-    TunnelWarlock();
+    TunnelWarlock(QObject *parent);
+
+    //Добавить соединение в функционал:
+    void addConnection(Connection* _connection);
+
+    //Удаляет соединение из функционала:
+    void removeConnection(Connection* _connection);
+
+private slots:
+    //Получает данные от соединений
+    void dataReciever(QString commandTypePrefix, QString message, Connection *fromConnection);
+
+    //Обновление по таймеру
+    void up();
+
+private:
+    //Все соединения:
+    QVector<Connection* > connections;
+
+    //Таймер обновления состояния
+    QTimer upTimer;
 };
 
 #endif // TUNNELWARLOCK_H
