@@ -12,10 +12,14 @@ public:
     explicit KnownPeer(QString _ip, int _port);
     
     //Адрес
-    QString ip;
+    QString ip;//Убрать в приват
 
     //Порт
-    int port;
+    int port;//Убрать в приват
+
+    QString getIp();
+
+    int getPort();
 
 signals:
     

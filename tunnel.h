@@ -8,17 +8,19 @@
 
 #include <knownpeer.h>
 
-class tunnel
+class Tunnel
 {
 private:
     //Необходимое колличество роутеров:
     int needRoutersNumber;
 
     //Массив данных о роутерах:
-    QVector<KnownPeer* > reuters;
+    QVector<KnownPeer* > routers;
 
 public:
-    tunnel();
+    Tunnel();
+
+    Tunnel(KnownPeer* firstPeer);
 
     //Добавить данные об известном роутере:
     void addRouterData(KnownPeer*);
@@ -29,7 +31,7 @@ public:
     //Получить колличество роутеров:
     int getRoutersNumber();
 
-    //Получить необходимое колличество роутеров:
+    //Получить необходимое колличество роутеров: зачем?
     int getNeedRoutersNumber();
 };
 

@@ -6,6 +6,7 @@
 
 #include <connection.h>
 #include <globalcondition.h>
+#include <tunnel.h>
 
 #include <QVector>
 #include <QTimer>
@@ -31,11 +32,17 @@ private slots:
     void up();
 
 private:
+    //Все туннели
+    QVector<Tunnel*> tunnels;
+
     //Все соединения:
     QVector<Connection* > connections;
 
     //Таймер обновления состояния
     QTimer upTimer;
+
+    //Создать туннель
+    void makeTunnel();
 };
 
 #endif // TUNNELWARLOCK_H
